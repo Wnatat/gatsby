@@ -1,0 +1,29 @@
+@import "~bootstrap/scss/bootstrap";
+
+.chart {
+  position: relative;
+  overflow: hidden;
+  padding: 10px;
+  box-shadow: 0px 0px 10px 1px rgba(0,0,0,.4);
+
+  &:after {
+    content: '';
+    display: block;
+    width: 110%;
+    height: 110%;
+    top: -5%;
+    left: -5%;
+    position: absolute;
+    background: linear-gradient(90deg, #18284833 0%, #4b6cb733 100%);
+    filter: blur(10px);
+  }
+
+  .row:first-child {
+    padding-top: 10px;
+  }
+
+  h3 {
+    font-size: 1em;
+    padding: 10px 10px 0 10px;
+  }
+}

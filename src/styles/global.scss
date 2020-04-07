@@ -1,0 +1,17 @@
+// Main styles variables
+$defaultColor: #b9cee3;
+$defaultBackgroundColor: #19191C;
+
+// Chart background variables
+$chartDefaultGradientAngle: 90deg;
+$chartDefaultGradientStart: #18284833;
+$chartDefaultGradientEnd: #4b6cb733;
+$chartDefaultBlurSize: 10px;
+
+html, body, #___gatsby, #gatsby-focus-wrapper {
+  height: 100%;
+}
+
+body {
+  color: $defaultColor;
+}
