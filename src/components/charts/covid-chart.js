@@ -1,9 +1,6 @@
 import React from "react"
 import Chart from "chart.js"
-import Row from "react-bootstrap/Row"
-import Col from "react-bootstrap/Col"
-import DropdownButton from "react-bootstrap/DropdownButton"
-import Dropdown from "react-bootstrap/Dropdown"
+import { Row, Col, UncontrolledDropdown, DropdownToggle, DropdownMenu, DropdownItem } from "reactstrap"
 
 export default class CovidChart extends React.Component {
   constructor() {
@@ -33,11 +30,18 @@ export default class CovidChart extends React.Component {
             <h3>{this.props.title}</h3>
           </Col>
           <Col sm={4} className="text-right">
-            <DropdownButton id="dropdown-basic-button" title="Dropdown button">
-              <Dropdown.Item href="#/action-1">Action</Dropdown.Item>
-              <Dropdown.Item href="#/action-2">Another action</Dropdown.Item>
-              <Dropdown.Item href="#/action-3">Something else</Dropdown.Item>
-            </DropdownButton>
+            <UncontrolledDropdown>
+              <DropdownToggle caret>
+                Dropdown
+              </DropdownToggle>
+              <DropdownMenu>
+                <DropdownItem header>Header</DropdownItem>
+                <DropdownItem disabled>Action</DropdownItem>
+                <DropdownItem>Another Action</DropdownItem>
+                <DropdownItem divider />
+                <DropdownItem>Another Action</DropdownItem>
+              </DropdownMenu>
+            </UncontrolledDropdown>
           </Col>
         </Row>
         <Row>

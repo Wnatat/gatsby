@@ -25,7 +25,7 @@ export default class LmaoDatasource extends React.Component {
           position: 'left',
           id: 'y-axis',
         }],
-      }
+      },
     }
 
     this.propsSet = false
