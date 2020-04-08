@@ -13,7 +13,7 @@ export const setDatasetsDeaths = (data) => ({
   data
 })
 
-export const setDatasetsREcovered = (data) => ({
+export const setDatasetsRecovered = (data) => ({
   type: 'SET_DATASETS_RECOVERED',
   data
 })
@@ -21,9 +21,4 @@ export const setDatasetsREcovered = (data) => ({
 export const setOptions = (options) => ({
   type: 'SET_OPTIONS',
   options
-})
-
-export const setDatasetsByContinent = (data) => ({
-  type: 'SET_DATASETS_BY_CONTINENT',
-  data
 })

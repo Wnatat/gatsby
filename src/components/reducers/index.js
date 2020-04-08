@@ -8,7 +8,7 @@ export default (state = {}, action) => {
   return Object.assign({}, state, {
     graphs: {
       cases: {
-        data: normalise(state.data, action),
+        data: normalise(state.graphs.cases.data, action),
         title: state.graphs.cases.title,
         filters: filters(state.graphs.cases.filters, action),
         labels: labels(state.graphs.cases.labels, action),

@@ -22,24 +22,15 @@ export default ({ children }) => (
             <NavLink href="https://walid.ovh">Me</NavLink>
           </NavItem>
           <UncontrolledDropdown nav inNavbar>
-            <DropdownToggle nav caret>
-              Charts
-            </DropdownToggle>
+            <DropdownToggle nav caret>Charts</DropdownToggle>
             <DropdownMenu>
-              <DropdownItem>
-                Charts
-              </DropdownItem>
-              <DropdownItem>
-                Statistics
-              </DropdownItem>
+              <DropdownItem>Charts</DropdownItem>
+              <DropdownItem>Statistics</DropdownItem>
               <DropdownItem divider />
-              <DropdownItem>
-                Recent
-              </DropdownItem>
+              <DropdownItem>Recent</DropdownItem>
             </DropdownMenu>
           </UncontrolledDropdown>
         </Nav>
-        {/* <NavbarText>Simple Text</NavbarText> */}
       </Collapse>
     </Navbar>
 

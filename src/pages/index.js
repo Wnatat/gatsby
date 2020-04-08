@@ -100,10 +100,10 @@ export default class Index extends React.Component {
     )
   }
 }
-// allKeyValue(filter: {country: {in: ["Italy", "Spain", "France", "UK", "Germany"]}}) {
+
 export const query = graphql`
   query {
-    allKeyValue(filter: {country: {in: ["Italy", "France", "UK"]}}) {
+    allKeyValue(filter: {country: {in: ["Italy", "France", "UK", "Germany", "USA"]}}) {
       nodes {
         id
         country

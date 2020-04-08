@@ -1,4 +1,5 @@
 import _ from "lodash"
+import continents from "./continents"
 
 const aggregateTimeserie = (array) => {
   // Formats a key-value collection into an array of { key: date, value: value}
@@ -30,23 +31,27 @@ const groupTimeseries = (items, timeserie) => {
   })
 }
 
-const normaliseData = (data) => {
-  return _.map(
-    _.mapValues(
-      // Group data array by country
-      _.groupBy(data, 'country'),
-      items => {
-        // For each grouped country array
-        const groups = {
-          cases: groupTimeseries(items, 'cases'),
-          deaths: groupTimeseries(items, 'deaths'),
-          recovered: groupTimeseries(items, 'recovered'),
-        }
-
-        // Aggregate all reduntant arrays for one country into one.
-        return aggregateTimeseries(groups)
+const groupBy = (data, dimension) => {
+  return _.mapValues(
+    // Group data array by country
+    _.groupBy(data, dimension),
+    items => {
+      // For each grouped country array
+      const groups = {
+        cases: groupTimeseries(items, 'cases'),
+        deaths: groupTimeseries(items, 'deaths'),
+        recovered: groupTimeseries(items, 'recovered'),
       }
-    )
+
+      // Aggregate all reduntant arrays for one country into one.
+      return aggregateTimeseries(groups)
+    }
+  )
+}
+
+const normaliseData = (data, dimension) => {
+  return _.map(
+    groupBy(data, dimension)
     , (item, key) => {
       return {
         country: key,
@@ -57,11 +62,21 @@ const normaliseData = (data) => {
   )
 }
 
+const getDatasetsByContinent = (data) => {
+  return normaliseData(_.map(data, (item) => {
+    return Object.assign({}, item, {
+      continent: _.filter(continents, ['country', item.country])[0].continent,
+    })
+  }), 'continent')
+}
+
 const normalise = (state = [], action) => {
   switch (action.type) {
     case 'NORMALISE_DATA':
       const validData = _.filter(action.data, 'country')
-      return normaliseData(validData)
+      return normaliseData(validData, 'country')
+    case 'GROUP_BY_CONTINENT':
+      return getDatasetsByContinent(action.data, 'continent')
     default:
       return state
   }

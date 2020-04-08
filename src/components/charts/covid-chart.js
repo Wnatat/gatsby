@@ -1,6 +1,6 @@
 import React from "react"
 import Chart from "chart.js"
-import { Row, Col, UncontrolledDropdown, DropdownToggle, DropdownMenu, DropdownItem } from "reactstrap"
+import { Row } from "reactstrap"
 
 export default class CovidChart extends React.Component {
   constructor() {
@@ -22,35 +22,28 @@ export default class CovidChart extends React.Component {
     });
   }
 
+  shouldComponentUpdate(nextProps) {
+    if (this.props.datasets.length === nextProps.datasets.length &&
+      this.props.labels[this.props.labels.length - 1] === nextProps.labels[nextProps.labels.length - 1]
+    ) {
+      return false
+    }
+
+    this.chart.config.data.labels = nextProps.labels
+    this.chart.config.data.datasets = nextProps.datasets
+    this.chart.update()
+
+    return true
+  }
+
   render() {
     return (
-      <div>
-        <Row>
-          <Col>
-            <h3>{this.props.title}</h3>
-          </Col>
-          <Col sm={4} className="text-right">
-            <UncontrolledDropdown>
-              <DropdownToggle caret>
-                Dropdown
-              </DropdownToggle>
-              <DropdownMenu>
-                <DropdownItem header>Header</DropdownItem>
-                <DropdownItem disabled>Action</DropdownItem>
-                <DropdownItem>Another Action</DropdownItem>
-                <DropdownItem divider />
-                <DropdownItem>Another Action</DropdownItem>
-              </DropdownMenu>
-            </UncontrolledDropdown>
-          </Col>
-        </Row>
-        <Row>
-          <canvas
-            id="chart"
-            ref={this.chartRef}
-          />
-        </Row>
-      </div>
+      <Row>
+        <canvas
+          id="chart"
+          ref={this.chartRef} />
+        />
+      </Row>
     )
   }
 }
