@@ -7,7 +7,8 @@ import rootReducer from '../components/reducers'
 import Layout from "../components/layout"
 import LmaoDatasource from "../components/containers/lmao-datasource"
 import CasesDeathByCountry from "../components/containers/cases-deaths-by-country"
-import { Row, Col } from "reactstrap"
+import Row from "react-bootstrap/Row"
+import Col from "react-bootstrap/Col"
 
 export default class Index extends React.Component {
   constructor({ data }) {
@@ -16,18 +17,8 @@ export default class Index extends React.Component {
     this.store = createStore(rootReducer, {
       graphs: {
         cases: {
-          data: {
-            original: [],
-            transformed: [],
-          },
+          data: [],
           title: "New Cases And Deaths By Country",
-          filters: {
-            geo: {
-              continent: null,
-              country: null,
-              province: null,
-            },
-          },
           labels: [],
           datasets: [],
           options: {
@@ -39,7 +30,20 @@ export default class Index extends React.Component {
                   bottom: 10
               }
             },
+            tooltips: {
+              enabled: true
+            },
             scales: {
+              xAxes: [
+                {
+                  display: true,
+                  gridLines: {
+                    display: true,
+                    drawTicks: true,
+                    drawOnChartArea: true,
+                  }
+                },
+              ],
               yAxes: [
                 {
                   type: 'linear',
@@ -91,7 +95,7 @@ export default class Index extends React.Component {
       <Layout>
           <Provider store={this.store}>
             <Row>
-              <Col md={8}>
+              <Col sm={8}>
                 <LmaoDatasource>
                   <CasesDeathByCountry />
                 </LmaoDatasource>
@@ -106,7 +110,7 @@ export default class Index extends React.Component {
 
 export const query = graphql`
   query {
-    allKeyValue(filter: {country: {in: ["Italy", "France", "UK", "Germany", "USA"]}}) {
+    allKeyValue(filter: {country: {in: ["Italy", "Spain", "France", "UK", "Germany"]}}) {
       nodes {
         id
         country

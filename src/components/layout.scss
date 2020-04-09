@@ -3,14 +3,14 @@
   
   .container-fluid {
     position: relative;
-    display: block;
     overflow: hidden;
     height: 100%;
     background-color: #19191C;
     color: white;
 
-    &:before {
+    &:after {
       content: '';
+      display: block;
       width: 110%;
       height: 110%;
       top: -5%;

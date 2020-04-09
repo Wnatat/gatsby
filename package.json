@@ -6,7 +6,7 @@
   "license": "MIT",
   "scripts": {
     "build": "gatsby build",
-    "develop": "ENABLE_GATSBY_REFRESH_ENDPOINT=true gatsby develop",
+    "develop": "gatsby develop",
     "format": "prettier --write \"**/*.{js,jsx,json,md}\"",
     "start": "npm run develop",
     "serve": "gatsby serve",
@@ -23,9 +23,9 @@
     "gatsby-transformer-json-key-value-to-array": "0.0.1",
     "node-sass": "^4.13.1",
     "react": "^16.12.0",
+    "react-bootstrap": "^1.0.0",
     "react-dom": "^16.12.0",
-    "react-redux": "^7.2.0",
-    "reactstrap": "^8.4.1"
+    "react-redux": "^7.2.0"
   },
   "devDependencies": {
     "prettier": "^1.19.1"

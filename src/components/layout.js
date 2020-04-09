@@ -1,37 +1,25 @@
 import React from "react"
-import { Container, Collapse, Navbar, NavbarToggler, NavbarBrand, Nav, NavItem, NavLink, UncontrolledDropdown, DropdownToggle, DropdownMenu, DropdownItem } from "reactstrap"
+import { Container, Navbar, Nav, NavDropdown } from "react-bootstrap"
 import './layout.scss'
-
-let isOpen = false
-const toggle = () => {
-  isOpen = !isOpen
-  return isOpen
-}
 
 export default ({ children }) => (
   <div id="main">
-    <Navbar color="dark" dark expand="md">
-      <NavbarBrand href="/">Covid-19</NavbarBrand>
-      <NavbarToggler onClick={toggle} />
-      <Collapse isOpen={isOpen} navbar>
-        <Nav className="mr-auto" navbar>
-          <NavItem>
-            <NavLink href="/about">About</NavLink>
-          </NavItem>
-          <NavItem>
-            <NavLink href="https://walid.ovh">Me</NavLink>
-          </NavItem>
-          <UncontrolledDropdown nav inNavbar>
-            <DropdownToggle nav caret>Charts</DropdownToggle>
-            <DropdownMenu>
-              <DropdownItem>Charts</DropdownItem>
-              <DropdownItem>Statistics</DropdownItem>
-              <DropdownItem divider />
-              <DropdownItem>Recent</DropdownItem>
-            </DropdownMenu>
-          </UncontrolledDropdown>
+    <Navbar bg="dark" variant="dark" expand="lg">
+      <Navbar.Brand href="/">Covid-19 stats page</Navbar.Brand>
+      <Navbar.Toggle aria-controls="basic-navbar-nav" />
+      <Navbar.Collapse id="basic-navbar-nav">
+        <Nav className="mr-auto">
+          <Nav.Link href="/">Home</Nav.Link>
+          <Nav.Link href="/about">About</Nav.Link>
+          <NavDropdown title="Dropdown" id="basic-nav-dropdown">
+            <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
+            <NavDropdown.Item href="#action/3.2">Another action</NavDropdown.Item>
+            <NavDropdown.Item href="#action/3.3">Something</NavDropdown.Item>
+            <NavDropdown.Divider />
+            <NavDropdown.Item href="#action/3.4">Separated link</NavDropdown.Item>
+          </NavDropdown>
         </Nav>
-      </Collapse>
+      </Navbar.Collapse>
     </Navbar>
 
     <Container fluid>
