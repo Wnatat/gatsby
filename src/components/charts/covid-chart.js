@@ -1,9 +1,6 @@
 import React from "react"
 import Chart from "chart.js"
-import Row from "react-bootstrap/Row"
-import Col from "react-bootstrap/Col"
-import DropdownButton from "react-bootstrap/DropdownButton"
-import Dropdown from "react-bootstrap/Dropdown"
+import { Row } from "reactstrap"
 
 export default class CovidChart extends React.Component {
   constructor() {
@@ -25,28 +22,27 @@ export default class CovidChart extends React.Component {
     });
   }
 
+  shouldComponentUpdate(nextProps) {
+    if (this.props.datasets.length === nextProps.datasets.length &&
+      this.props.labels[this.props.labels.length - 1] === nextProps.labels[nextProps.labels.length - 1]
+    ) {
+      return false
+    }
+
+    this.chart.config.data.labels = nextProps.labels
+    this.chart.config.data.datasets = nextProps.datasets
+    this.chart.update()
+
+    return true
+  }
+
   render() {
     return (
-      <div>
-        <Row>
-          <Col>
-            <h3>{this.props.title}</h3>
-          </Col>
-          <Col sm={4} className="text-right">
-            <DropdownButton id="dropdown-basic-button" title="Dropdown button">
-              <Dropdown.Item href="#/action-1">Action</Dropdown.Item>
-              <Dropdown.Item href="#/action-2">Another action</Dropdown.Item>
-              <Dropdown.Item href="#/action-3">Something else</Dropdown.Item>
-            </DropdownButton>
-          </Col>
-        </Row>
-        <Row>
-          <canvas
-            id="chart"
-            ref={this.chartRef}
-          />
-        </Row>
-      </div>
+      <Row>
+        <canvas
+          id="chart"
+          ref={this.chartRef} />
+      </Row>
     )
   }
 }

@@ -55,17 +55,10 @@ const getDatasets = (data, type) => {
   })
 }
 
-const getDatasetsByContinent = (data) => {
-  return data
-}
-
 export default (state = [], action) => {
   switch (action.type) {
     case 'SET_DATASETS_CASES':
-      return [
-        ...state,
-        ...getDatasets(action.data, 'cases')
-      ]
+      return getDatasets(action.data, 'cases')
     case 'SET_DATASETS_DEATHS':
       return [
         ...state,
@@ -75,11 +68,6 @@ export default (state = [], action) => {
       return [
         ...state,
         ...getDatasets(action.data, 'recovered')
-      ]
-    case 'SET_DATASETS_BY_CONTINENT':
-      return [
-        ...state,
-        ...getDatasetsByContinent(action.data)
       ]
     default:
       return state
