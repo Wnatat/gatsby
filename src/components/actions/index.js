@@ -3,6 +3,11 @@ export const normalise = (data) => ({
   data
 })
 
+export const groupByCountry = (data) => ({
+  type: 'GROUP_BY_COUNTRY',
+  data
+})
+
 export const groupByContinent = (data) => ({
   type: 'GROUP_BY_CONTINENT',
   data

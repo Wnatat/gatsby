@@ -70,13 +70,21 @@ const getDatasetsByContinent = (data) => {
   }), 'continent')
 }
 
-const normalise = (state = [], action) => {
+const normalise = (state = { original: [], transformed: [] }, action) => {
   switch (action.type) {
     case 'NORMALISE_DATA':
       const validData = _.filter(action.data, 'country')
-      return normaliseData(validData, 'country')
+      return Object.assign({}, state, {
+        original: normaliseData(validData, 'country'),
+      })
+    case 'GROUP_BY_COUNTRY':
+      return Object.assign({}, state, {
+        transformed: state.original,
+      })
     case 'GROUP_BY_CONTINENT':
-      return getDatasetsByContinent(action.data, 'continent')
+      return Object.assign({}, state, {
+        transformed: getDatasetsByContinent(action.data, 'continent'),
+      })
     default:
       return state
   }

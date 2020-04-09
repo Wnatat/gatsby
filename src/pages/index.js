@@ -16,7 +16,10 @@ export default class Index extends React.Component {
     this.store = createStore(rootReducer, {
       graphs: {
         cases: {
-          data: [],
+          data: {
+            original: [],
+            transformed: [],
+          },
           title: "New Cases And Deaths By Country",
           filters: {
             geo: {

@@ -31,16 +31,16 @@ export default class LmaoDatasource extends React.Component {
   }
 
   componentWillMount() {
-    this.props.dispatch(setLabels(this.props.data))
-    this.props.dispatch(setDatasetsCases(this.props.data))
-    this.props.dispatch(setDatasetsDeaths(this.props.data))
+    this.props.dispatch(setLabels(this.props.data.original))
+    this.props.dispatch(setDatasetsCases(this.props.data.original))
+    this.props.dispatch(setDatasetsDeaths(this.props.data.original))
     this.props.dispatch(setOptions(this.defaultOptions))
   }
 
   componentDidUpdate() {
-    this.props.dispatch(setLabels(this.props.data))
-    this.props.dispatch(setDatasetsCases(this.props.data))
-    this.props.dispatch(setDatasetsDeaths(this.props.data))
+    this.props.dispatch(setLabels(this.props.data.transformed))
+    this.props.dispatch(setDatasetsCases(this.props.data.transformed))
+    this.props.dispatch(setDatasetsDeaths(this.props.data.transformed))
     this.props.dispatch(setOptions(this.defaultOptions))
   }
 
@@ -55,8 +55,8 @@ export default class LmaoDatasource extends React.Component {
 
           <Col className="text-right">
             <ButtonGroup size="sm">
-              <Button>By Country</Button>
-              <Button onClick={() => this.props.groupByContinent(this.props.data)}>By Continent</Button>
+              <Button onClick={() => this.props.groupByCountry(this.props.data.original)}>By Country</Button>
+              <Button onClick={() => this.props.groupByContinent(this.props.data.original)}>By Continent</Button>
               <UncontrolledButtonDropdown size="sm">
                 <DropdownToggle caret>Filter</DropdownToggle>
                 <DropdownMenu right>

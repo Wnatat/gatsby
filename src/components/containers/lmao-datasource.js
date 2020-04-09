@@ -1,6 +1,6 @@
 import { connect } from 'react-redux'
 import LmaoDatasource from '../charts/datasource'
-import { groupByContinent } from "../actions/index"
+import { groupByCountry, groupByContinent } from "../actions/index"
 
 const mapStateToProps = state => ({
   data: state.graphs.cases.data,
@@ -9,12 +9,15 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => {
   return {
     dispatch,
+    groupByCountry: (data) => {
+      dispatch(groupByCountry(data))
+    },
     groupByContinent: (data) => {
       dispatch(groupByContinent(data))
       // dispatch(setLabels(data))
       // dispatch(setDatasetsCases(data))
       // dispatch(setDatasetsDeaths(data))
-    }
+    },
   }
 }
 
