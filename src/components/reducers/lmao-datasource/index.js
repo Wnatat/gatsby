@@ -2,9 +2,7 @@ import _ from "lodash"
 import continents from "./continents"
 
 const aggregateTimeserie = (array) => {
-  // Formats a key-value collection into an array of { key: date, value: value}
   return _.map(
-    // This reduces multiple array of dates and values into one array of dates with sum of values from other arrays.
     _.reduce(array, (accumulator, item) => {
       const agg = accumulator
       _.forEach(item, (object, date) => {
@@ -19,7 +17,7 @@ const aggregateTimeserie = (array) => {
 }
 
 const aggregateTimeseries = (groups) => {
-  return _.mapValues(groups, (group, key) => {
+  return _.mapValues(groups, (group) => {
     return aggregateTimeserie(group)
   })
 }
@@ -33,17 +31,14 @@ const groupTimeseries = (items, timeserie) => {
 
 const groupBy = (data, dimension) => {
   return _.mapValues(
-    // Group data array by country
     _.groupBy(data, dimension),
     items => {
-      // For each grouped country array
       const groups = {
         cases: groupTimeseries(items, 'cases'),
         deaths: groupTimeseries(items, 'deaths'),
         recovered: groupTimeseries(items, 'recovered'),
       }
 
-      // Aggregate all reduntant arrays for one country into one.
       return aggregateTimeseries(groups)
     }
   )

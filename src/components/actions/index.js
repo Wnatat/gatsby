@@ -8,7 +8,6 @@ export const groupByCountry = (data) => ({
   data
 })
 
-export const groupByContinent = (data) => ({
+export const groupByContinent = () => ({
   type: 'GROUP_BY_CONTINENT',
-  data
 })
