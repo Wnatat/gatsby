@@ -4,6 +4,7 @@ import { groupByCountry, groupByContinent } from "../actions/index"
 
 const mapStateToProps = state => ({
   data: state.graphs.cases.data,
+  title: state.graphs.cases.title,
 })
 
 const mapDispatchToProps = dispatch => {
@@ -14,9 +15,6 @@ const mapDispatchToProps = dispatch => {
     },
     groupByContinent: (data) => {
       dispatch(groupByContinent(data))
-      // dispatch(setLabels(data))
-      // dispatch(setDatasetsCases(data))
-      // dispatch(setDatasetsDeaths(data))
     },
   }
 }
