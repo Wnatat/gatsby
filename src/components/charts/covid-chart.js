@@ -13,7 +13,7 @@ export default class CovidChart extends React.Component {
     
     Chart.defaults.global.defaultFontColor = '#fff';
     this.chart = new Chart(myChartRef, {
-      type: "line",
+      type: this.props.type,
       data: {
         labels: this.props.labels,
         datasets: this.props.datasets
@@ -38,9 +38,9 @@ export default class CovidChart extends React.Component {
 
   render() {
     return (
-      <Row>
+      <Row className="h-100">
         <canvas
-          id="chart"
+          id={this._reactInternalFiber.elementType.name}
           ref={this.chartRef} />
       </Row>
     )

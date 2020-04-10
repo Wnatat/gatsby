@@ -3,8 +3,8 @@
 .chart {
   position: relative;
   overflow: hidden;
+  height: 100%;
   padding: 10px;
-  box-shadow: 0px 0px 10px 1px rgba(0,0,0,.4);
 
   &:before {
     content: '';
@@ -15,7 +15,6 @@
     left: -5%;
     position: absolute;
     background: linear-gradient(90deg, #18284833 0%, #4b6cb733 100%);
-    filter: blur(10px);
   }
 
   .row:first-child {

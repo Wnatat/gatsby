@@ -2,12 +2,13 @@ import { graphql } from 'gatsby'
 import React from "react"
 import { createStore } from 'redux'
 import { Provider } from 'react-redux'
-import { normalise } from '../components/actions'
+import { normaliseCasesDeaths, normaliseDailyInfections } from '../components/actions'
 import rootReducer from '../components/reducers'
 import Layout from "../components/layout"
-import LmaoDatasource from "../components/containers/lmao-datasource"
+import CasesDeathsLmaoDatasource from "../components/containers/cases-deaths-lmao-datasource"
 import CasesDeathByCountry from "../components/containers/cases-deaths"
-import CasesDeathSince from "../components/containers/daily-infections"
+import DailyInfectionsLmaoDatasource from "../components/containers/daily-infections-lmao-datasource"
+import DailyInfections from "../components/containers/daily-infections"
 import { Row, Col } from "reactstrap"
 
 export default class Index extends React.Component {
@@ -22,6 +23,7 @@ export default class Index extends React.Component {
             transformed: [],
           },
           title: "New Cases And Deaths By Country",
+          type: "line",
           labels: [],
           datasets: [],
           options: {
@@ -74,15 +76,17 @@ export default class Index extends React.Component {
             }
           },
         },
-        dailyNewInfections: {
+        dailyInfections: {
           data: {
             original: [],
             transformed: [],
           },
           title: "Daily infections",
+          type: "bar",
           labels: [],
           datasets: [],
           options: {
+            aspectRatio: 1,
             layout: {
               padding: {
                   left: 10,
@@ -96,7 +100,7 @@ export default class Index extends React.Component {
                 {
                   type: 'linear',
                   display: true,
-                  position: 'left',
+                  position: 'right',
                   id: 'y-axis-cases',
                   gridLines: {
                     display: true,
@@ -113,21 +117,6 @@ export default class Index extends React.Component {
                     labelString: 'cases'
                   },
                 },
-                {
-                  type: 'linear',
-                  display: true,
-                  position: 'right',
-                  id: 'y-axis-deaths',
-                  ticks: {
-                    callback: value => {
-                        return value.toLocaleString('en-GB');
-                    }
-                  },
-                  scaleLabel: {
-                    display: true,
-                    labelString: 'deaths'
-                  },
-                }
               ],
             }
           },
@@ -145,23 +134,24 @@ export default class Index extends React.Component {
       }
     })
 
-    this.store.dispatch(normalise(data.allKeyValue.nodes))
+    this.store.dispatch(normaliseCasesDeaths(data.allKeyValue.nodes))
+    this.store.dispatch(normaliseDailyInfections(data.allKeyValue.nodes))
   }
 
   render() {
     return (
       <Layout>
           <Provider store={this.store}>
-            <Row>
+            <Row className="no-gutters h-100">
               <Col md={8}>
-                <LmaoDatasource>
+                <CasesDeathsLmaoDatasource>
                   <CasesDeathByCountry />
-                </LmaoDatasource>
+                </CasesDeathsLmaoDatasource>
               </Col>
               <Col>
-                <LmaoDatasource>
-                  <CasesDeathSince />
-                </LmaoDatasource>
+                <DailyInfectionsLmaoDatasource>
+                  <DailyInfections />
+                </DailyInfectionsLmaoDatasource>
               </Col>
             </Row>
           </Provider>

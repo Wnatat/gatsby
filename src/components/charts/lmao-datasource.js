@@ -1,6 +1,5 @@
 import React from "react"
 import { Row, Col, Button, ButtonGroup, UncontrolledButtonDropdown, DropdownToggle, DropdownMenu, DropdownItem } from "reactstrap"
-import { setLabels, setDatasetsCases, setDatasetsDeaths, setOptions } from '../actions/chart'
 import "./datasource.scss"
 
 export default class LmaoDatasource extends React.Component {
@@ -30,20 +29,6 @@ export default class LmaoDatasource extends React.Component {
     }
   }
 
-  componentWillMount() {
-    this.props.dispatch(setLabels(this.props.data.original))
-    this.props.dispatch(setDatasetsCases(this.props.data.original))
-    this.props.dispatch(setDatasetsDeaths(this.props.data.original))
-    this.props.dispatch(setOptions(this.defaultOptions))
-  }
-
-  componentDidUpdate() {
-    this.props.dispatch(setLabels(this.props.data.transformed))
-    this.props.dispatch(setDatasetsCases(this.props.data.transformed))
-    this.props.dispatch(setDatasetsDeaths(this.props.data.transformed))
-    this.props.dispatch(setOptions(this.defaultOptions))
-  }
-
   render() {
 
     return (
@@ -55,8 +40,8 @@ export default class LmaoDatasource extends React.Component {
 
           <Col className="text-right">
             <ButtonGroup size="sm">
-              <Button onClick={() => this.props.groupByCountry(this.props.data.original)}>By Country</Button>
-              <Button onClick={() => this.props.groupByContinent(this.props.data.original)}>By Continent</Button>
+              <Button onClick={() => this.props.groupByCountry(this.props.data.original)}>Country</Button>
+              <Button onClick={() => this.props.groupByContinent(this.props.data.original)}>Continent</Button>
               <UncontrolledButtonDropdown size="sm">
                 <DropdownToggle caret>Filter</DropdownToggle>
                 <DropdownMenu right>
