@@ -40,7 +40,7 @@ export default class CovidChart extends React.Component {
     return (
       <Row className="h-100">
         <canvas
-          id={this._reactInternalFiber.elementType.name}
+          id="chart"
           ref={this.chartRef} />
       </Row>
     )
