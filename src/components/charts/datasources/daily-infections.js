@@ -10,7 +10,7 @@ export default class DailyInfectionsDatasource extends LmaoDatasource {
 
   componentDidUpdate() {
     this.props.dispatch(setLabelsDailyInfections(this.props.data.transformed))
-    this.props.dispatch(setDatasetsDailyInfections(this.props.data.original))
+    this.props.dispatch(setDatasetsDailyInfections(this.props.data.transformed))
     this.props.dispatch(setOptions(this.defaultOptions))
   }
 }

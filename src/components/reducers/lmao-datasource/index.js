@@ -65,37 +65,24 @@ const getDatasetsByContinent = (data) => {
   }), 'continent')
 }
 
-const normalise = (state = { original: [], transformed: [] }, action) => {
-  switch (action.type) {
-    case 'NORMALISE_DATA_CASES_DEATHS':
-      let validData = _.filter(action.data, 'country')
-      return Object.assign({}, state, {
-        original: normaliseData(validData, 'country'),
-      })
-    case 'NORMALISE_DATA_DAILY_INFECTIONS':
-      validData = _.filter(action.data, 'country')
-      return Object.assign({}, state, {
-        original: normaliseData(validData, 'country'),
-      })
-    case 'GROUP_CASES_DEATHS_BY_COUNTRY':
-      return Object.assign({}, state, {
-        transformed: state.original,
-      })
-    case 'GROUP_CASES_DEATHS_BY_CONTINENT':
-      return Object.assign({}, state, {
-        transformed: getDatasetsByContinent(action.data, 'continent'),
-      })
-    case 'GROUP_DAILY_INFECTIONS_BY_COUNTRY':
-      return Object.assign({}, state, {
-        transformed: state.original,
-      }) 
-    case 'GROUP_DAILY_INFECTIONS_BY_CONTINENT':
-      return Object.assign({}, state, {
-        transformed: getDatasetsByContinent(action.data, 'continent'),
-      })
-    default:
-      return state
+export const createNormaliseReducerWithNameType = (chartName = 'CASES_DEATHS') => {
+  return (state = { original: [], transformed: [] }, action) => {
+    switch (action.type) {
+      case `NORMALISE_DATA_${chartName}`:
+        let validData = _.filter(action.data, 'country')
+        return Object.assign({}, state, {
+          original: normaliseData(validData, 'country'),
+        })
+      case `GROUP_${chartName}_BY_COUNTRY`:
+        return Object.assign({}, state, {
+          transformed: state.original,
+        })
+      case `GROUP_${chartName}_BY_CONTINENT`:
+        return Object.assign({}, state, {
+          transformed: getDatasetsByContinent(action.data, 'continent'),
+        })
+      default:
+        return state
+    }
   }
 }
-
-export default normalise

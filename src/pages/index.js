@@ -22,7 +22,7 @@ export default class Index extends React.Component {
             original: [],
             transformed: [],
           },
-          title: "New Cases And Deaths By Country",
+          title: "New Cases And Deaths",
           type: "line",
           labels: [],
           datasets: [],
