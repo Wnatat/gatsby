@@ -8,10 +8,13 @@ $chartDefaultGradientStart: #18284833;
 $chartDefaultGradientEnd: #4b6cb733;
 $chartDefaultBlurSize: 10px;
 
-html, body, #___gatsby, #gatsby-focus-wrapper {
+html, body {
   height: 100%;
 }
 
 body {
   color: $defaultColor;
+  background: radial-gradient(circle at 20% 10%, #485591 0%, #252b54 50%);
+  background-repeat: no-repeat;
+  background-color: #242b53;
 }

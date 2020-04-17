@@ -43,12 +43,12 @@ const getDailyVarianceDatasets = (data, type) => {
   return map(data, (country, key) => {
     const returned = []
     for (let i = 0; i < country.timeline[type].length; i++) {
-      let previousValue = country.timeline[type][i - 1] == null ? 0 : country.timeline[type][i - 1].value
+      let previousValue = country.timeline[type][i - 1] == null ? country.timeline[type][i].value : country.timeline[type][i - 1].value
       returned.push(country.timeline[type][i].value - previousValue)
     }
 
     return {
-      label: country.country + ' ' + type,
+      label: country.country,
       borderColor: colours[key],
       backgroundColor: colours[key],
       borderDash: borderDash,

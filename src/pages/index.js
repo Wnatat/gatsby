@@ -100,7 +100,6 @@ export default class Index extends React.Component {
                 {
                   type: 'linear',
                   display: true,
-                  position: 'right',
                   id: 'y-axis-cases',
                   gridLines: {
                     display: true,

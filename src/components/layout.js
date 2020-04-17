@@ -10,7 +10,7 @@ const toggle = () => {
 
 export default ({ children }) => (
   <div id="main">
-    <Navbar color="dark" dark expand="md">
+    <Navbar dark expand="md">
       <NavbarBrand href="/">Covid-19</NavbarBrand>
       <NavbarToggler onClick={toggle} />
       <Collapse isOpen={isOpen} navbar>
@@ -32,6 +32,7 @@ export default ({ children }) => (
           </UncontrolledDropdown>
         </Nav>
       </Collapse>
+      <div className="nav-background"></div>
     </Navbar>
 
     <Container fluid>
