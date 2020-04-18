@@ -65,7 +65,7 @@ const getDatasetsByContinent = (data) => {
   }), 'continent')
 }
 
-export const createNormaliseReducerWithNameType = (chartName = 'CASES_DEATHS') => {
+export const createNormaliseReducer = (chartName = 'CASES_DEATHS') => {
   return (state = { original: [], transformed: [] }, action) => {
     switch (action.type) {
       case `NORMALISE_DATA_${chartName}`:
