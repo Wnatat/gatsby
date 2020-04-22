@@ -10,6 +10,7 @@ export default (state = {}, action) => {
     graphs: {
       cases: {
         data: createNormaliseReducer('CASES_DEATHS')(state.graphs.cases.data, action),
+        filters: state.graphs.cases.filters,
         title: state.graphs.cases.title,
         type: state.graphs.cases.type,
         labels: casesDeathsLabels(state.graphs.cases.labels, action),

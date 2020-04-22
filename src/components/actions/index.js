@@ -32,3 +32,13 @@ export const groupDailyInfectionsByContinent = (data) => ({
   type: 'GROUP_DAILY_INFECTIONS_BY_CONTINENT',
   data
 })
+
+export const setCasesDeathsFilters = (filter) => ({
+  type: 'SET_CASES_DEATHS_FILTERS',
+  filter
+})
+
+export const setDailyInfectionsFilters = (filter) => ({
+  type: 'SET_DAILY_INFECTIONS_FILTERS',
+  filter
+})

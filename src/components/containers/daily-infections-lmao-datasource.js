@@ -1,6 +1,6 @@
 import { connect } from 'react-redux'
 import DailyInfectionsLmaoDatasource from '../charts/datasources/daily-infections'
-import { groupDailyInfectionsByCountry, groupDailyInfectionsByContinent } from "../actions/index"
+import { groupDailyInfectionsByCountry, groupDailyInfectionsByContinent, setDailyInfectionsFilters } from "../actions/index"
 
 const mapStateToProps = state => ({
   data: state.graphs.dailyInfections.data,
@@ -16,6 +16,9 @@ const mapDispatchToProps = dispatch => {
     },
     groupByContinent: (data) => {
       dispatch(groupDailyInfectionsByContinent(data))
+    },
+    setFilters: (filter) => {
+      dispatch(setDailyInfectionsFilters(filter))
     },
   }
 }

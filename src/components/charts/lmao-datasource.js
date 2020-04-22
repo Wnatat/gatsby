@@ -1,5 +1,6 @@
 import React from "react"
-import { Row, Col, Button, ButtonGroup, UncontrolledButtonDropdown, DropdownToggle, DropdownMenu, DropdownItem } from "reactstrap"
+import _ from "lodash"
+import { Row, Col, Button, ButtonGroup, UncontrolledButtonDropdown, DropdownToggle, DropdownMenu, DropdownItem, FormGroup, Label, Input } from "reactstrap"
 import "./datasource.scss"
 
 export default class LmaoDatasource extends React.Component {
@@ -30,6 +31,14 @@ export default class LmaoDatasource extends React.Component {
   }
 
   render() {
+    const dropdownMenu = _.map(this.props.data.original, (item) => {
+      return <div className="dropdown-item" key={item.country} >
+        <Label check>
+          <Input type="checkbox" defaultChecked={this.props.data.filters.indexOf(item.country) !== -1} onChange={() => this.props.setFilters(item.country)} />{' '}
+          {item.country}
+        </Label>
+      </div>
+    })
 
     return (
       <div className="chart">
@@ -43,14 +52,9 @@ export default class LmaoDatasource extends React.Component {
               <Button onClick={() => this.props.groupByCountry(this.props.data.original)}>Country</Button>
               <Button onClick={() => this.props.groupByContinent(this.props.data.original)}>Continent</Button>
               <UncontrolledButtonDropdown size="sm">
-                <DropdownToggle caret>Filter</DropdownToggle>
+                <DropdownToggle caret>Filters</DropdownToggle>
                 <DropdownMenu right>
-                  <DropdownItem header>Europe</DropdownItem>
-                  <DropdownItem disabled>Belarus</DropdownItem>
-                  <DropdownItem>France</DropdownItem>
-                  <DropdownItem divider />
-                  <DropdownItem header>Africa</DropdownItem>
-                  <DropdownItem>South Africa</DropdownItem>
+                  {dropdownMenu}
                 </DropdownMenu>
               </UncontrolledButtonDropdown>
             </ButtonGroup>
