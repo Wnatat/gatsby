@@ -33,12 +33,22 @@ export const groupDailyInfectionsByContinent = (data) => ({
   data
 })
 
-export const setCasesDeathsFilters = (filter) => ({
-  type: 'SET_CASES_DEATHS_FILTERS',
+export const toggleCasesDeathsFilter = (filter) => ({
+  type: 'TOGGLE_CASES_DEATHS_FILTER',
   filter
 })
 
-export const setDailyInfectionsFilters = (filter) => ({
-  type: 'SET_DAILY_INFECTIONS_FILTERS',
+export const toggleDailyInfectionsFilter = (filter) => ({
+  type: 'TOGGLE_DAILY_INFECTIONS_FILTER',
   filter
+})
+
+export const toggleCasesDeathsFiltersGroup = (group) => ({
+  type: 'TOGGLE_CASES_DEATHS_FILTERS_GROUP',
+  group
+})
+
+export const toggleDailyInfectionsFiltersGroup = (group) => ({
+  type: 'TOGGLE_DAILY_INFECTIONS_FILTERS_GROUP',
+  group
 })

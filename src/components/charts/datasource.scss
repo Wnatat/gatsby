@@ -5,20 +5,29 @@
   padding-left: 5px;
 }
 
-.dropdown-item {
-  cursor: pointer;
-
-  &:active {
-    color: #212529;
-    text-decoration: none;
-    background-color: transparent;
-  }
-
+.dropdown-menu {
   .form-check-input {
     position: unset;
     margin-top: 0;
     margin-left: 0;
-}
+  }
+  
+  .dropdown-header {
+    svg {
+      fill: gray;
+      stroke: gray;
+    }
+  }
+
+  .dropdown-item {
+    cursor: pointer;
+
+    &:active {
+      color: #212529;
+      text-decoration: none;
+      background-color: transparent;
+    }
+  }
 }
 
 .chart {

@@ -46,8 +46,13 @@ const normaliseData = (data, dimension) => {
   return _.map(
     groupBy(data, dimension)
     , (item, key) => {
+      const itemMetas = _.filter(continents, { 'country': key })[0] || []
+      const code = itemMetas.code || null
+      const continent = itemMetas.continent || null
       return {
         country: key,
+        code: code,
+        continent: continent,
         province: null,
         timeline: item
       }
@@ -77,16 +82,16 @@ export const createNormaliseReducer = (chartName = 'CASES_DEATHS') => {
       case `GROUP_${chartName}_BY_COUNTRY`:
         return Object.assign({}, state, {
           transformed: state.original,
-          filters: _.map(normalisedData, 'country'),
+          // filters: _.map(normalisedData, 'country'),
         })
       case `GROUP_${chartName}_BY_CONTINENT`:
         const filtered = _.filter(action.data, (item) => state.filters.indexOf(item.country) !== -1)
         const dataset = getDatasetsByContinent(filtered, 'continent');
         return Object.assign({}, state, {
           transformed: dataset,
-          filters: state.filters,
+          // filters: state.filters,
         })
-      case `SET_${chartName}_FILTERS`:
+      case `TOGGLE_${chartName}_FILTER`:
         const index = state.filters.indexOf(action.filter)
         const filters = state.filters
         if (index !== -1) {
@@ -98,6 +103,19 @@ export const createNormaliseReducer = (chartName = 'CASES_DEATHS') => {
         return Object.assign({}, state, {
           transformed: _.filter(state.original, (item) => filters.indexOf(item.country) !== -1),
           filters: filters,
+        })
+      case `TOGGLE_${chartName}_FILTERS_GROUP`:
+        const items = _.map(_.filter(state.original, { 'continent': action.group }), 'country')
+
+        let newFilters = []
+        if(_.intersection(items, state.filters).length === items.length) {
+          newFilters = _.filter(state.filters, item => items.indexOf(item) === -1)
+        } else {
+          newFilters = _.union(state.filter, items)
+        }
+
+        return Object.assign({}, state, {
+          filters: newFilters,
         })
       default:
         return state
