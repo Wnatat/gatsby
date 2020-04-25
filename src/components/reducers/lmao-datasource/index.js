@@ -43,10 +43,12 @@ const groupBy = (data, dimension) => {
 }
 
 const normaliseData = (data, dimension) => {
+  const validData = _.filter(data, 'country')
+  
   return _.map(
-    groupBy(data, dimension)
+    groupBy(validData, dimension)
     , (item, key) => {
-      const itemMetas = _.filter(continents, { 'country': key })[0] || []
+      const itemMetas = _.find(continents, { 'country': key }) || []
       const code = itemMetas.code || null
       const continent = itemMetas.continent || null
       return {
@@ -68,54 +70,66 @@ const getDatasetsByContinent = (data) => {
   }), 'continent')
 }
 
+const filterData = (data, filters) => {
+  return _.filter(data, (item) => filters.indexOf(item.country) !== -1)
+}
+
+const toggleFilters = (filters, selectedFilters, toggler) => {
+  return toggler() ? 
+  _.without(filters, ...selectedFilters) : 
+  _.union(filters, selectedFilters)
+}
+
+const getTransformedData = (data, filters, groupBy) => {
+  return groupBy === 'country' ?
+  filterData(data, filters) :
+  getDatasetsByContinent(filterData(data, filters))
+}
+
 export const createNormaliseReducer = (chartName = 'CASES_DEATHS') => {
-  return (state = { original: [], transformed: [], filters: {} }, action) => {
+  return (state = { original: [], transformed: [], filters: [], groupBy: 'country' }, action) => {
     switch (action.type) {
       case `NORMALISE_DATA_${chartName}`:
-        const validData = _.filter(action.data, 'country')
-        const normalisedData = normaliseData(validData, 'country')
+        const normalisedData = normaliseData(action.data, 'country')
         return Object.assign({}, state, {
           original: normalisedData,
           transformed: normalisedData,
           filters: _.map(normalisedData, 'country'),
+          groupBy: 'country',
         })
       case `GROUP_${chartName}_BY_COUNTRY`:
         return Object.assign({}, state, {
-          transformed: state.original,
-          // filters: _.map(normalisedData, 'country'),
+          transformed: filterData(state.original, state.filters),
+          groupBy: 'country',
         })
       case `GROUP_${chartName}_BY_CONTINENT`:
-        const filtered = _.filter(action.data, (item) => state.filters.indexOf(item.country) !== -1)
-        const dataset = getDatasetsByContinent(filtered, 'continent');
         return Object.assign({}, state, {
-          transformed: dataset,
-          // filters: state.filters,
+          transformed: getDatasetsByContinent(filterData(action.data, state.filters)),
+          groupBy: 'continent',
         })
       case `TOGGLE_${chartName}_FILTER`:
-        const index = state.filters.indexOf(action.filter)
-        const filters = state.filters
-        if (index !== -1) {
-          filters.splice(index, 1)
-        } else {
-          filters.push(action.filter)
-        }
-
+        const activeFilters = toggleFilters(state.filters, [action.filter], () => {
+          return state.filters.indexOf(action.filter) !== -1
+        })
+        
         return Object.assign({}, state, {
-          transformed: _.filter(state.original, (item) => filters.indexOf(item.country) !== -1),
-          filters: filters,
+          transformed: getTransformedData(state.original, activeFilters, state.groupBy),
+          filters: activeFilters,
         })
       case `TOGGLE_${chartName}_FILTERS_GROUP`:
-        const items = _.map(_.filter(state.original, { 'continent': action.group }), 'country')
+        const filterable = _.map(_.filter(state.original, { 'continent': action.group }), 'country')
 
-        let newFilters = []
-        if(_.intersection(items, state.filters).length === items.length) {
-          newFilters = _.filter(state.filters, item => items.indexOf(item) === -1)
-        } else {
-          newFilters = _.union(state.filter, items)
-        }
+        const selectedFilters = _.filter(state.filters, (filter) => {
+          return _.find(continents, { country: filter }).continent === action.group
+        })
+
+        const activeGroupFilters = toggleFilters(state.filters, filterable, () => {
+          return _.intersection(filterable, selectedFilters).length === filterable.length
+        })
 
         return Object.assign({}, state, {
-          filters: newFilters,
+          transformed: getTransformedData(state.original, activeGroupFilters, state.groupBy),
+          filters: activeGroupFilters,
         })
       default:
         return state

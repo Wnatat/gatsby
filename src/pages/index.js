@@ -22,6 +22,7 @@ export default class Index extends React.Component {
             original: [],
             transformed: [],
             filters: [],
+            groupBy: null,
           },
           title: "New Cases And Deaths",
           type: "line",
@@ -82,6 +83,7 @@ export default class Index extends React.Component {
             original: [],
             transformed: [],
             filters: [],
+            groupBy: null,
           },
           title: "Daily infections",
           type: "bar",
@@ -122,16 +124,6 @@ export default class Index extends React.Component {
             }
           },
         },
-        // casesSince: {
-        //   data: {
-        //     original: [],
-        //     transformed: [],
-        //   },
-        //   title: "",
-        //   labels: [],
-        //   datasets: [],
-        //   options: [],
-        // },
       }
     })
 

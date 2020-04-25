@@ -4,7 +4,6 @@ import { groupCasesDeathsByCountry, groupCasesDeathsByContinent, toggleCasesDeat
 
 const mapStateToProps = state => ({
   data: state.graphs.cases.data,
-  filters: state.graphs.cases.filters,
   title: state.graphs.cases.title,
   type: state.graphs.cases.type,
 })

@@ -38,18 +38,18 @@ export default class LmaoDatasource extends React.Component {
     _.forEach(
       _.groupBy(this.props.data.original, 'continent'),
       (group, continent) => {
-        dropdownMenu.push(<DropdownItem header key={continent} >
+        dropdownMenu.push(<div className="dropdown-header" key={continent} >
           <Label check>
-            <Input type="checkbox" defaultChecked={_.intersection(_.map(group, 'country'), this.props.data.filters).length === group.length} onChange={() => this.props.toggleFiltersGroup(continent)} />{' '}
+            <Input type="checkbox" checked={_.intersection(_.map(group, 'country'), this.props.data.filters).length === group.length} onChange={() => this.props.toggleFiltersGroup(continent)} />{' '}
             <ContinentIcon continent={continent} width="16" height="16" />{' '}
             {continent}
           </Label>
-        </DropdownItem>)
+        </div>)
 
         _.forEach(group, item => {
           dropdownMenu.push(<div className="dropdown-item" key={item.country} >
             <Label check>
-              <Input type="checkbox" defaultChecked={this.props.data.filters.indexOf(item.country) !== -1} onChange={() => this.props.toggleFilter(item.country)} />{' '}
+              <Input type="checkbox" checked={this.props.data.filters.indexOf(item.country) !== -1} onChange={() => this.props.toggleFilter(item.country)} />{' '}
               <Flag code={item.code} height="16" width="16"/>{' '}
               {item.country}
             </Label>

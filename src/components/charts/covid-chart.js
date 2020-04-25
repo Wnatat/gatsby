@@ -23,12 +23,6 @@ export default class CovidChart extends React.Component {
   }
 
   shouldComponentUpdate(nextProps) {
-    if (this.props.datasets.length === nextProps.datasets.length &&
-      this.props.labels[this.props.labels.length - 1] === nextProps.labels[nextProps.labels.length - 1]
-    ) {
-      return false
-    }
-
     this.chart.config.data.labels = nextProps.labels
     this.chart.config.data.datasets = nextProps.datasets
     this.chart.update()
