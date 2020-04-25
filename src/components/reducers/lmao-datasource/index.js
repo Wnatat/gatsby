@@ -76,14 +76,14 @@ const filterData = (data, filters) => {
 
 const toggleFilters = (filters, selectedFilters, toggler) => {
   return toggler() ? 
-  _.without(filters, ...selectedFilters) : 
-  _.union(filters, selectedFilters)
+    _.without(filters, ...selectedFilters) : 
+    _.union(filters, selectedFilters)
 }
 
 const getTransformedData = (data, filters, groupBy) => {
   return groupBy === 'country' ?
-  filterData(data, filters) :
-  getDatasetsByContinent(filterData(data, filters))
+    filterData(data, filters) :
+    getDatasetsByContinent(filterData(data, filters))
 }
 
 export const createNormaliseReducer = (chartName = 'CASES_DEATHS') => {
