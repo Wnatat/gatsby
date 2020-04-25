@@ -1,8 +1,3 @@
-// export const normalise = (data) => ({
-//   type: 'NORMALISE_DATA',
-//   data
-// })
-
 export const normaliseCasesDeaths = (data) => ({
   type: 'NORMALISE_DATA_CASES_DEATHS',
   data
