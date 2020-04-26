@@ -47,3 +47,17 @@ export const toggleDailyInfectionsFiltersGroup = (group) => ({
   type: 'TOGGLE_DAILY_INFECTIONS_FILTERS_GROUP',
   group
 })
+
+export const topCasesDeaths = (data, number, dimension) => ({
+  type: 'TOP_CASES_DEATHS',
+  data,
+  number,
+  dimension
+})
+
+export const topDailyInfections = (data, number, dimension) => ({
+  type: 'TOP_DAILY_INFECTIONS',
+  data,
+  number,
+  dimension
+})

@@ -69,6 +69,13 @@ export default class LmaoDatasource extends React.Component {
               <Button onClick={() => this.props.groupByCountry(this.props.data.original)}>Country</Button>
               <Button onClick={() => this.props.groupByContinent(this.props.data.original)}>Continent</Button>
               <UncontrolledButtonDropdown size="sm">
+                <DropdownToggle caret>Top</DropdownToggle>
+                <DropdownMenu right>
+                  <DropdownItem onClick={() => this.props.top(this.props.data.original, 3, 'cases')}>Top 3</DropdownItem>
+                  <DropdownItem onClick={() => this.props.top(this.props.data.original, 5, 'cases')}>Top 5</DropdownItem>
+                </DropdownMenu>
+              </UncontrolledButtonDropdown>
+              <UncontrolledButtonDropdown size="sm">
                 <DropdownToggle caret>Filters</DropdownToggle>
                 <DropdownMenu right>
                   {dropdownMenu}

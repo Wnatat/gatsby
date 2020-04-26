@@ -86,11 +86,21 @@ const getTransformedData = (data, filters, groupBy) => {
     getDatasetsByContinent(filterData(data, filters))
 }
 
+const sortByDimension = (data, dimension) => {
+  return _.orderBy(data, (item) => {
+    return _.reduce(item.timeline[dimension], (sum, n) => {
+      return { value: sum.value + n.value }
+    }, { value: 0 }).value
+  }, 'desc')
+}
+
+const topN = (data, dimension = 'cases', n = 5)  => _.slice(sortByDimension(data, dimension), 0, n)
+
 export const createNormaliseReducer = (chartName = 'CASES_DEATHS') => {
   return (state = { original: [], transformed: [], filters: [], groupBy: 'country' }, action) => {
     switch (action.type) {
       case `NORMALISE_DATA_${chartName}`:
-        const normalisedData = normaliseData(action.data, 'country')
+        const normalisedData = topN(normaliseData(action.data, 'country'))
         return Object.assign({}, state, {
           original: normalisedData,
           transformed: normalisedData,
@@ -130,6 +140,15 @@ export const createNormaliseReducer = (chartName = 'CASES_DEATHS') => {
         return Object.assign({}, state, {
           transformed: getTransformedData(state.original, activeGroupFilters, state.groupBy),
           filters: activeGroupFilters,
+        })
+      case `TOP_${chartName}`:
+        const top = topN(action.data, action.dimension, action.number)
+
+        const topFilters = _.map(top, 'country')
+
+        return Object.assign({}, state, {
+          transformed: getTransformedData(top, topFilters, state.groupBy),
+          filters: topFilters,
         })
       default:
         return state

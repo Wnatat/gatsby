@@ -1,6 +1,6 @@
 import { connect } from 'react-redux'
 import CasesDeathsLmaoDatasource from '../charts/datasources/cases-deaths'
-import { groupCasesDeathsByCountry, groupCasesDeathsByContinent, toggleCasesDeathsFilter, toggleCasesDeathsFiltersGroup } from "../actions/index"
+import { groupCasesDeathsByCountry, groupCasesDeathsByContinent, toggleCasesDeathsFilter, toggleCasesDeathsFiltersGroup, topCasesDeaths } from "../actions/index"
 
 const mapStateToProps = state => ({
   data: state.graphs.cases.data,
@@ -22,6 +22,9 @@ const mapDispatchToProps = dispatch => {
     },
     toggleFiltersGroup: (group) => {
       dispatch(toggleCasesDeathsFiltersGroup(group))
+    },
+    top: (data, number, dimension) => {
+      dispatch(topCasesDeaths(data, number, dimension))
     },
   }
 }
