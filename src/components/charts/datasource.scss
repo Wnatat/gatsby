@@ -6,6 +6,8 @@
 }
 
 .dropdown-menu {
+  opacity: .95;
+  
   .form-check-input {
     position: unset;
     margin-top: 0;
@@ -13,6 +15,11 @@
   }
   
   .dropdown-header {
+    input[type="checkbox"] {
+      width: 1em;
+      height: 1em;
+    }
+
     svg {
       fill: gray;
       stroke: gray;

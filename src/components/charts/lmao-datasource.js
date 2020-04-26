@@ -50,7 +50,7 @@ export default class LmaoDatasource extends React.Component {
           dropdownMenu.push(<div className="dropdown-item" key={item.country} >
             <Label check>
               <Input type="checkbox" checked={this.props.data.filters.indexOf(item.country) !== -1} onChange={() => this.props.toggleFilter(item.country)} />{' '}
-              <Flag code={item.code} height="16" width="16"/>{' '}
+              <Flag code={item.code} width="16"/>{' '}
               {item.country}
             </Label>
           </div>)
