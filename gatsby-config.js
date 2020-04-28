@@ -53,6 +53,12 @@ module.exports = {
       resolve: `gatsby-transformer-json-key-value-to-array`
     },
     {
+      resolve: `gatsby-source-remote-csv`
+    },
+    {
+      resolve: `gatsby-transformer-csv-to-object`
+    },
+    {
       resolve: `gatsby-plugin-sass`
     }
   ]

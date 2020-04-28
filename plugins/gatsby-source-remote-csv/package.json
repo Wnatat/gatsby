@@ -1,5 +1,5 @@
 {
-  "name": "gatsby-transformer-json-key-value-to-array",
+  "name": "gatsby-source-remote-csv",
   "version": "1.0.0",
   "description": "",
   "main": "gatsby-node.js",

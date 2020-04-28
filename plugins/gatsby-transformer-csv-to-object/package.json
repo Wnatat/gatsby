@@ -1,6 +1,6 @@
 {
-  "name": "gatsby-transformer-json-key-value-to-array",
-  "version": "1.0.0",
+  "name": "gatsby-transformer-csv-to-object",
+  "version": "0.0.1",
   "description": "",
   "main": "gatsby-node.js",
   "keywords": [

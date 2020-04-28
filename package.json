@@ -20,13 +20,13 @@
     "gatsby-plugin-sass": "^2.2.1",
     "gatsby-source-apiserver": "^2.0.0",
     "gatsby-source-filesystem": "^2.2.2",
-    "gatsby-transformer-json-key-value-to-array": "0.0.1",
     "node-sass": "^4.13.1",
     "react": "^16.12.0",
     "react-dom": "^16.12.0",
     "react-redux": "^7.2.0",
     "react-world-flags": "^1.3.0",
-    "reactstrap": "^8.4.1"
+    "reactstrap": "^8.4.1",
+    "papaparse": "^5.2.0"
   },
   "devDependencies": {
     "prettier": "^1.19.1"

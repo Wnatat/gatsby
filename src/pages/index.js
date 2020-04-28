@@ -129,6 +129,9 @@ export default class Index extends React.Component {
 
     this.store.dispatch(normaliseCasesDeaths(data.allKeyValue.nodes))
     this.store.dispatch(normaliseDailyInfections(data.allKeyValue.nodes))
+
+    // this.store.dispatch(normaliseCasesDeaths(data.allFrGov.nodes))
+    // this.store.dispatch(normaliseDailyInfections(data.allFrGov.nodes))
   }
 
   render() {
@@ -178,3 +181,32 @@ export const query = graphql`
     }
   }
 `
+
+// export const query = graphql`
+//   query MyQuery {
+//     allFrGov(filter: {province: {eq: "59"}}) {
+//       nodes {
+//         country
+//         province
+//         timeline {
+//           cases {
+//             key
+//             value
+//           }
+//           deaths {
+//             key
+//             value
+//           }
+//           reanimations {
+//             key
+//             value
+//           }
+//           recovered {
+//             key
+//             value
+//           }
+//         }
+//       }
+//     }
+//   }
+// `
