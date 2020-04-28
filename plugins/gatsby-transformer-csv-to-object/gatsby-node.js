@@ -76,11 +76,7 @@ exports.onCreateNode = async ({
       })
     })
     .each((item) => {
-      console.log(item.province)
       createTransformedNode(item, createNodeId(`fr-gov-${item.province}`), 'FrGov')
     })
     .value()
-  
-  // console.log(JSON.stringify(data, null, 4))
-  // console.log(data)
 }

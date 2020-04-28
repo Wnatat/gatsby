@@ -1,6 +1,6 @@
 import React from "react"
 import _ from "lodash"
-import Flag from "react-world-flags"
+import ReactCountryFlag from "react-country-flag"
 import ContinentIcon from "../icons/icon"
 import { Row, Col, Button, ButtonGroup, UncontrolledButtonDropdown, DropdownToggle, DropdownMenu, DropdownItem, FormGroup, Label, Input } from "reactstrap"
 import "./datasource.scss"
@@ -50,7 +50,7 @@ export default class LmaoDatasource extends React.Component {
           dropdownMenu.push(<div className="dropdown-item" key={item.country} >
             <Label check>
               <Input type="checkbox" checked={this.props.data.filters.indexOf(item.country) !== -1} onChange={() => this.props.toggleFilter(item.country)} />{' '}
-              <Flag code={item.code} width="16"/>{' '}
+              <ReactCountryFlag countryCode={item.code} svg style={{ width: '1em', height: '1em' }}/>{' '}
               {item.country}
             </Label>
           </div>)
