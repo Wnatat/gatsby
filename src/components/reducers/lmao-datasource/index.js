@@ -94,7 +94,7 @@ const sortByDimension = (data, dimension) => {
   }, 'desc')
 }
 
-const topN = (data, dimension = 'cases', n = 5)  => _.slice(sortByDimension(data, dimension), 0, n)
+const topN = (data, dimension = 'cases', n = 10)  => _.slice(sortByDimension(data, dimension), 0, n)
 
 export const createNormaliseReducer = (chartName = 'CASES_DEATHS') => {
   return (state = { original: [], transformed: [], filters: [], groupBy: 'country' }, action) => {
