@@ -52,6 +52,19 @@ module.exports = {
     {
       resolve: `gatsby-source-remote-file`,
       options: {
+        countryCode: 'GLOBAL',
+        files: [
+          { 
+            url: 'https://opendata.ecdc.europa.eu/covid19/casedistribution/json/',
+            strategy: 'jsonCasesDeaths',
+            updatedAtHour: '11',
+          },
+        ],
+      },
+    },
+    {
+      resolve: `gatsby-source-remote-file`,
+      options: {
         countryCode: 'FR',
         files: [
           { 

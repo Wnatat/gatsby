@@ -21,30 +21,35 @@ const day = (date) => doubleDigit(date.getDate())
 
 const wasUpdated = (updatedAtHour) => doubleDigit(today().getHours()) >= updatedAtHour
 
-const interpolateDateVariables = (url, updatedAtHour) => {
+const interpolateDateVariables = (updatedAtHour) => {
   const publicationDate = wasUpdated(updatedAtHour) ? today : yesterday
 
-  const replacements = {
-    "${year}": formatDate(year)(publicationDate()),
-    "${month}": formatDate(month)(publicationDate()),
-    "${day}": formatDate(day)(publicationDate()),
+  return (url) => {
+    const replacements = {
+      "${year}": formatDate(year)(publicationDate()),
+      "${month}": formatDate(month)(publicationDate()),
+      "${day}": formatDate(day)(publicationDate()),
+    }
+  
+    return url.replace(/\$\{\w+\}/g, (all) => replacements[all] || all)
   }
-
-  return url.replace(/\$\{\w+\}/g, (all) => replacements[all] || all)
 }
 
 exports.sourceNodes = async ({ actions, createNodeId, createContentDigest, getCache }, pluginOptions) => {
   const { createNode } = actions
 
-  const object = { countryCode: pluginOptions.countryCode }
+  const options = {
+    ...pluginOptions,
+    files: _.map(pluginOptions.files, (file) => ({ ...file, url: interpolateDateVariables(file.updatedAtHour)(file.url) }))
+  }
 
   createNode({
-    ...pluginOptions,
+    ...options,
     id: createNodeId(`file-manager-${pluginOptions.countryCode}`),
     children: [],
     parent: null,
     internal: {
-      contentDigest: createContentDigest(object),
+      contentDigest: createContentDigest(pluginOptions),
       type: 'filesManager'
     }
   })
@@ -55,11 +60,12 @@ exports.sourceNodes = async ({ actions, createNodeId, createContentDigest, getCa
 exports.onCreateNode = async ({ node, getNode, actions, createNodeId, getCache }, pluginOptions) => {
   const { createNode, createParentChildLink } = actions
 
-  if (node.internal.type === 'filesManager') {
+  // Check if current plugin instance has created the node
+  if (node.internal.type === 'filesManager' && node.countryCode === pluginOptions.countryCode) {
     _.forEach(pluginOptions.files, async (file) => {
       try {
         await createRemoteFileNode({
-          url: interpolateDateVariables(file.url, file.updatedAtHour),
+          url: interpolateDateVariables(file.updatedAtHour)(file.url),
           parentNodeId: node.id,
           getCache,
           createNode,
@@ -70,7 +76,7 @@ exports.onCreateNode = async ({ node, getNode, actions, createNodeId, getCache }
       }
     })
   }
-  
+
   if (node.internal.type === 'File' && node.parent !== null) {
     const parent = getNode(node.parent)
     createParentChildLink({ parent: parent, child: node })
