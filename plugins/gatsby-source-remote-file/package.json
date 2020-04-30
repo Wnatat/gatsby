@@ -1,0 +1,15 @@
+{
+  "name": "gatsby-source-remote-file",
+  "version": "0.0.1",
+  "description": "",
+  "main": "gatsby-node.js",
+  "keywords": [
+    "gatsby",
+    "gatsby-plugin"
+  ],
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Wawa",
+  "license": "ISC"
+}

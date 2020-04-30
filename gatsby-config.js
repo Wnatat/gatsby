@@ -47,13 +47,25 @@ module.exports = {
       resolve: `gatsby-transformer-json-key-value-to-array`
     },
     {
-      resolve: `gatsby-source-remote-csv`
-    },
-    {
-      resolve: `gatsby-transformer-csv-to-object`
-    },
-    {
       resolve: `gatsby-plugin-sass`
-    }
+    },
+    {
+      resolve: `gatsby-source-remote-file`,
+      options: {
+        countryCode: 'FR',
+        files: [
+          { 
+            url: 'https://static.data.gouv.fr/resources/donnees-hospitalieres-relatives-a-lepidemie-de-covid-19/${year}${month}${day}-190020/donnees-hospitalieres-covid19-${year}-${month}-${day}-19h00.csv',
+            strategy: 'csvHosp',
+            updatedAtHour: '19',
+          },
+          { 
+            url: 'https://static.data.gouv.fr/resources/donnees-relatives-aux-tests-de-depistage-de-covid-19-realises-en-laboratoire-de-ville/${year}${month}${day}-190018/donnees-tests-covid19-labo-quotidien-${year}-${month}-${day}-19h00.csv',
+            strategy: 'csvTest',
+            updatedAtHour: '19',
+          },
+        ],
+      },
+    },
   ]
 }
