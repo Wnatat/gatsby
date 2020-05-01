@@ -50,9 +50,9 @@ module.exports = {
       resolve: `gatsby-plugin-sass`
     },
     {
-      resolve: `gatsby-source-remote-file`,
+      resolve: `gatsby-source-files-manager`,
       options: {
-        countryCode: 'GLOBAL',
+        countryCode: 'UK',
         files: [
           { 
             url: 'https://opendata.ecdc.europa.eu/covid19/casedistribution/json/',
@@ -63,12 +63,17 @@ module.exports = {
       },
     },
     {
-      resolve: `gatsby-source-remote-file`,
+      resolve: `gatsby-source-files-manager`,
       options: {
         countryCode: 'FR',
         files: [
           { 
-            url: 'https://static.data.gouv.fr/resources/donnees-hospitalieres-relatives-a-lepidemie-de-covid-19/${year}${month}${day}-190020/donnees-hospitalieres-covid19-${year}-${month}-${day}-19h00.csv',
+            url: 'https://opendata.ecdc.europa.eu/covid19/casedistribution/json/',
+            strategy: 'jsonCasesDeaths',
+            updatedAtHour: '11',
+          },
+          { 
+            url: 'https://static.data.gouv.fr/resources/donnees-hospitalieres-relatives-a-lepidemie-de-covid-19/${year}${month}${day}-190018/donnees-hospitalieres-covid19-${year}-${month}-${day}-19h00.csv',
             strategy: 'csvHosp',
             updatedAtHour: '19',
           },

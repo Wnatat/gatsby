@@ -1,5 +1,5 @@
 {
-  "name": "gatsby-source-remote-file",
+  "name": "gatsby-source-files-manager",
   "version": "0.0.1",
   "description": "",
   "main": "gatsby-node.js",
