@@ -30,7 +30,7 @@ exports.onCreateNode = async ({
     createParentChildLink({ parent: node, child: jsonNode })
   }
 
-  const contents = fs.readFileSync(node.absolutePath, 'utf8');
+  const contents = fs.readFileSync(node.absolutePath, 'utf8')
 
   const csv = Papa.parse(contents, {
     header: true,

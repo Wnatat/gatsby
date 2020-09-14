@@ -38,9 +38,17 @@ const interpolateDateVariables = (updatedAtHour) => {
 exports.sourceNodes = async ({ actions, createNodeId, createContentDigest, getCache }, pluginOptions, cb) => {
   const { createNode } = actions
 
-  const remoteFiles = _.chain(pluginOptions.files).map((file) => {
-    return { ...file, url: interpolateDateVariables(file.updatedAtHour)(file.url) }
-  }).map((file) => {
+  const options = {
+    ...pluginOptions,
+    files: _.map(pluginOptions.files, (file) => {
+      return {
+        ...file,
+        url: interpolateDateVariables(file.updatedAtHour)(file.url),
+      }
+    })
+  }
+
+  const remoteFiles = _.map(options.files, (file) => {
     return createRemoteFileNode({
       url: interpolateDateVariables(file.updatedAtHour)(file.url),
       parentNodeId: null,
@@ -53,12 +61,12 @@ exports.sourceNodes = async ({ actions, createNodeId, createContentDigest, getCa
   // creating remoteFileNodes asynchronously to retrieve their ID and attribute them as children to FilesManager
   Promise.all(remoteFiles).then((downloadedRemoteFile) => {
     createNode({
-      ...pluginOptions,
-      id: createNodeId(`file-manager-${pluginOptions.countryCode}`),
+      ...options,
+      id: createNodeId(`file-manager-${options.countryCode}`),
       children: _.map(downloadedRemoteFile, 'id'),
       parent: null,
       internal: {
-        contentDigest: createContentDigest(pluginOptions),
+        contentDigest: createContentDigest(options),
         type: 'filesManager'
       }
     })
@@ -69,42 +77,3 @@ exports.sourceNodes = async ({ actions, createNodeId, createContentDigest, getCa
     cb()
   })
 }
-
-// exports.onPostBuild = async ({ graphql, actions, createNodeId, createContentDigest }, pluginOptions) => {
-//   const { createNode } = actions
-
-//   const normalise = (data) => {
-//     console.log(data, 'hey')
-//     // createNode({
-//     //   ...data,
-//     //   id: createNodeId(`test-${true}`),
-//     //   children: [],
-//     //   parent: null,
-//     //   internal: {
-//     //     contentDigest: createContentDigest(data),
-//     //     type: 'test'
-//     //   }
-//     // })
-//   }
-
-//   graphql(`
-//     query AllFilesManagers {
-//       allFilesManager {
-//         nodes {
-//           countryCode
-//           id
-//           children {
-//             id
-//           }
-//           files {
-//             strategy
-//             url
-//             updatedAtHour
-//           }
-//         }
-//       }
-//     }
-//   `).then(normalise)
-
-//   return
-// }

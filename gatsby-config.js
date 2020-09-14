@@ -56,7 +56,7 @@ module.exports = {
         files: [
           { 
             url: 'https://opendata.ecdc.europa.eu/covid19/casedistribution/json/',
-            strategy: 'jsonCasesDeaths',
+            strategy: 'ecdcCasesDeaths',
             updatedAtHour: '11',
           },
         ],
@@ -69,21 +69,47 @@ module.exports = {
         files: [
           { 
             url: 'https://opendata.ecdc.europa.eu/covid19/casedistribution/json/',
-            strategy: 'jsonCasesDeaths',
+            strategy: 'ecdcCasesDeaths',
             updatedAtHour: '11',
           },
           { 
-            url: 'https://static.data.gouv.fr/resources/donnees-hospitalieres-relatives-a-lepidemie-de-covid-19/${year}${month}${day}-190018/donnees-hospitalieres-covid19-${year}-${month}-${day}-19h00.csv',
+            url: 'https://www.data.gouv.fr/en/datasets/r/63352e38-d353-4b54-bfd1-f1b3ee1cabd7',
             strategy: 'csvHosp',
-            updatedAtHour: '19',
+            updatedAtHour: '18',
           },
           { 
-            url: 'https://static.data.gouv.fr/resources/donnees-relatives-aux-tests-de-depistage-de-covid-19-realises-en-laboratoire-de-ville/${year}${month}${day}-190018/donnees-tests-covid19-labo-quotidien-${year}-${month}-${day}-19h00.csv',
+            url: 'https://www.data.gouv.fr/fr/datasets/r/b4ea7b4b-b7d1-4885-a099-71852291ff20',
             strategy: 'csvTest',
-            updatedAtHour: '19',
+            updatedAtHour: '18',
           },
         ],
       },
+    },
+    // {
+    //   resolve: `gatsby-source-files-manager`,
+    //   options: {
+    //     countryCode: 'FR',
+    //     files: [
+    //       { 
+    //         url: 'https://opendata.ecdc.europa.eu/covid19/casedistribution/json/',
+    //         strategy: 'ecdcCasesDeaths',
+    //         updatedAtHour: '11',
+    //       },
+    //       { 
+    //         url: 'https://static.data.gouv.fr/resources/donnees-hospitalieres-relatives-a-lepidemie-de-covid-19/${year}${month}${day}-190023/donnees-hospitalieres-covid19-${year}-${month}-${day}-19h00.csv',
+    //         strategy: 'csvHosp',
+    //         updatedAtHour: '18',
+    //       },
+    //       { 
+    //         url: 'https://static.data.gouv.fr/resources/donnees-relatives-aux-tests-de-depistage-de-covid-19-realises-en-laboratoire-de-ville/${year}${month}${day}-190022/donnees-tests-covid19-labo-quotidien-${year}-${month}-${day}-19h00.csv',
+    //         strategy: 'csvTest',
+    //         updatedAtHour: '18',
+    //       },
+    //     ],
+    //   },
+    // },
+    {
+      resolve: `gatsby-transformer-managed-files`,
     },
   ]
 }
