@@ -1,7 +1,9 @@
 const _ = require(`lodash`)
 const { normalise } = require(`./normaliser`)
 
-exports.createPages = async ({ graphql, actions }, pluginOptions) => {
+exports.createPages = async ({ graphql, actions, createNodeId, createContentDigest }, pluginOptions) => {
+  const { createNode } = actions
+
   const result = await graphql(`
   query AllFilesManagers {
     allFilesManager {
@@ -21,7 +23,22 @@ exports.createPages = async ({ graphql, actions }, pluginOptions) => {
       }
     }
   }`
-  ).then((results) => normalise(results.data.allFilesManager.nodes))
-  // ).then((results) => console.log(JSON.stringify(results, null, 4)))
-  return
+  ).then((results) => {
+    const datasets = normalise(results.data.allFilesManager.nodes)
+
+    _.forEach(datasets, dataset => {
+      const nodeMeta = {
+        id: createNodeId(`dataset-${dataset.countryCode}`),
+        children: [],
+        parent: null,
+        internal: {
+          type: 'datasets',
+          contentDigest: createContentDigest(JSON.stringify(dataset))
+        },
+      }
+      
+      const node = Object.assign({}, { 'countryCode': dataset.countryCode }, nodeMeta)
+      createNode(node)
+    })
+  })
 }

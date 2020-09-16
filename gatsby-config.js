@@ -4,48 +4,48 @@ module.exports = {
   },
 
   plugins: [
-    {
-      resolve: `gatsby-source-apiserver`,
-      options: {
-        typePrefix: ``,
+    // {
+    //   resolve: `gatsby-source-apiserver`,
+    //   options: {
+    //     typePrefix: ``,
 
-        url: `https://corona.lmao.ninja/v2/historical`,
+    //     url: `https://corona.lmao.ninja/v2/historical`,
   
-        method: "get",
+    //     method: "get",
   
-        headers: {
-          "Content-Type": "application/json"
-        },
+    //     headers: {
+    //       "Content-Type": "application/json"
+    //     },
 
-        name: `countries`,
+    //     name: `countries`,
 
-        refreshId: `country`,
+    //     refreshId: `country`,
 
-        schemaType: {
-          country: ``,
-          province: null,
-          timeline: {
-            cases: {}, 
-            deaths: {},
-            recovered: {},
-          },
-        },
+    //     schemaType: {
+    //       country: ``,
+    //       province: null,
+    //       timeline: {
+    //         cases: {}, 
+    //         deaths: {},
+    //         recovered: {},
+    //       },
+    //     },
 
-        localSave: true,
-        path: `${__dirname}/src/data/`,
-      }
-    },
-    {
-      resolve: `gatsby-source-filesystem`,
-      options: {
-        name: `data`,
-        path: `${__dirname}/src/data/`,
-        ignore: [`**/\.*`],
-      },
-    },
-    {
-      resolve: `gatsby-transformer-json-key-value-to-array`
-    },
+    //     localSave: true,
+    //     path: `${__dirname}/src/data/`,
+    //   }
+    // },
+    // {
+    //   resolve: `gatsby-source-filesystem`,
+    //   options: {
+    //     name: `data`,
+    //     path: `${__dirname}/src/data/`,
+    //     ignore: [`**/\.*`],
+    //   },
+    // },
+    // {
+    //   resolve: `gatsby-transformer-json-key-value-to-array`
+    // },
     {
       resolve: `gatsby-plugin-sass`
     },
@@ -84,32 +84,6 @@ module.exports = {
           },
         ],
       },
-    },
-    // {
-    //   resolve: `gatsby-source-files-manager`,
-    //   options: {
-    //     countryCode: 'FR',
-    //     files: [
-    //       { 
-    //         url: 'https://opendata.ecdc.europa.eu/covid19/casedistribution/json/',
-    //         strategy: 'ecdcCasesDeaths',
-    //         updatedAtHour: '11',
-    //       },
-    //       { 
-    //         url: 'https://static.data.gouv.fr/resources/donnees-hospitalieres-relatives-a-lepidemie-de-covid-19/${year}${month}${day}-190023/donnees-hospitalieres-covid19-${year}-${month}-${day}-19h00.csv',
-    //         strategy: 'csvHosp',
-    //         updatedAtHour: '18',
-    //       },
-    //       { 
-    //         url: 'https://static.data.gouv.fr/resources/donnees-relatives-aux-tests-de-depistage-de-covid-19-realises-en-laboratoire-de-ville/${year}${month}${day}-190022/donnees-tests-covid19-labo-quotidien-${year}-${month}-${day}-19h00.csv',
-    //         strategy: 'csvTest',
-    //         updatedAtHour: '18',
-    //       },
-    //     ],
-    //   },
-    // },
-    {
-      resolve: `gatsby-transformer-managed-files`,
     },
   ]
 }
