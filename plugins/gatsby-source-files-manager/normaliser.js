@@ -1,22 +1,21 @@
 const _ = require(`lodash`)
+const { strategies } = require(`./sources/strategies`)
 const { Timelines } = require(`./domain/Timelines`)
 const { ManagedFiles } = require(`./domain/ManagedFiles`)
-const { ecdcTimelines } = require(`./domain/Timelines/ecdc`)
-const { santePubliqueFranceHospTimelines, santePubliqueFranceTestTimelines } = require(`./domain/Timelines/santePubliqueFrance`)
 
 const getManagedFiles = (item) => _.map(item.files, file => { 
   return {
     ..._.filter(item.childrenFile, childFile => childFile.url === file.url)[0],
-    strategy: file.strategy,
+    ...file,
   }
 })
 
-const strategies = {
-  ecdcCasesDeaths: ecdcTimelines,
-  csvHosp: santePubliqueFranceHospTimelines,
-  csvTest: santePubliqueFranceTestTimelines
-}
-
+// const strategies = {
+//   ecdcCasesDeaths: ecdcTimelines,
+//   csvHosp: santePubliqueFranceHospTimelines,
+//   csvTest: santePubliqueFranceTestTimelines,
+//   xlsxCases: sciensanoCasesTimelines,
+// }
 const extractTimelines = countryCode => files => {
   return _.map(files, file => {
     return Timelines.of(file).map(strategies[file.strategy](countryCode))

@@ -11,7 +11,7 @@ const columns = (cols, func) => {
 exports.columns = columns
 
 exports.getTimelines = datasource => (dateAccessor, valueAccessor, cols) => managedFile => {
-  return _.reduce(datasource(managedFile.absolutePath), (acc, record) => {
+  return _.reduce(datasource(managedFile), (acc, record) => {
     return columns(cols, (col) => {
       return [
         ...(acc[col] || []),

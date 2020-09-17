@@ -3,7 +3,7 @@ const { parseCsv } = require(`../../../filesystem/file`)
 const { getTimelines, columns } = require(`../index`)
 
 const santePubliqueFranceData = (filter, cols) => path => {
-  const c = _.chain(parseCsv(path).data)
+  return _.chain(parseCsv(path).data)
   .filter(filter)
   .groupBy('jour')
   .map((group, date) => {
@@ -15,9 +15,6 @@ const santePubliqueFranceData = (filter, cols) => path => {
     }, {})
   })
   .value()
-
-  // console.log(c)
-  return c
 }
 
 exports.santePubliqueFranceHospTimelines = () => {

@@ -1,5 +1,5 @@
 import LmaoDatasource from "../lmao-datasource"
-import { setLabelsDailyInfections, setDatasetsDailyInfections, setOptions } from '../../../store/actions/chart'
+import { setLabelsDailyInfections, setDatasetsDailyInfections, setOptions } from '../../actions/chart'
 
 export default class DailyInfectionsDatasource extends LmaoDatasource {
   componentWillMount() {

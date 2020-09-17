@@ -40,7 +40,7 @@ exports.sourceNodes = async ({ actions, createNodeId, createContentDigest, getCa
 }
 
 exports.onCreateNode = ({ node, actions, getNode, createNodeId, createContentDigest }) => {
-  const { createNode, createNodeField } = actions
+  const { createNode } = actions
 
   if (node.internal.type === 'filesManager') {
     node.childrenFile = []
@@ -55,7 +55,9 @@ exports.onCreateNode = ({ node, actions, getNode, createNodeId, createContentDig
     })
 
     const datasets = normalise([node])
-     _.forEach(datasets, dataset => {
+    console.log(datasets)
+
+    _.forEach(datasets, dataset => {
       const nodeMeta = {
         id: createNodeId(`dataset-${dataset.countryCode}`),
         children: [],

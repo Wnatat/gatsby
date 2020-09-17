@@ -1,5 +1,5 @@
 import LmaoDatasource from "../lmao-datasource"
-import { setLabelsCasesDeaths, setDatasetsCases, setDatasetsDeaths, setOptions } from '../../../store/actions/chart'
+import { setLabelsCasesDeaths, setDatasetsCases, setDatasetsDeaths, setOptions } from '../../actions/chart'
 
 export default class CasesDeathsDatasource extends LmaoDatasource {
   componentWillMount() {

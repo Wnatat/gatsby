@@ -1,15 +1,22 @@
 const fs = require('fs')
 const { fromJson } = require(`./json`)
 const { fromCsv } = require(`./csv`)
+const { fromXlsx } = require(`./xlsx`)
 
 const fileContents = (path) => fs.readFileSync(path, 'utf8')
 
-const parse = (parse) => (path) => {
+const parseContents = parse => path => {
   return parse(fileContents(path))
 }
 
-exports.parse = parse
+const parsePath = parse => (path, sheet) => {
+  return parse(path, sheet)
+}
 
-exports.parseJson = parse(fromJson)
+exports.parse = parseContents
 
-exports.parseCsv = parse(fromCsv)
+exports.parseJson = parseContents(fromJson)
+
+exports.parseCsv = parseContents(fromCsv)
+
+exports.parseXlsx = parsePath(fromXlsx)

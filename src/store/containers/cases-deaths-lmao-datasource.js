@@ -1,6 +1,6 @@
 import { connect } from 'react-redux'
 import CasesDeathsLmaoDatasource from '../charts/datasources/cases-deaths'
-import { groupCasesDeathsByCountry, groupCasesDeathsByContinent, toggleCasesDeathsFilter, toggleCasesDeathsFiltersGroup, topCasesDeaths } from "../../store/actions/index"
+import { groupCasesDeathsByCountry, groupCasesDeathsByContinent, toggleCasesDeathsFilter, toggleCasesDeathsFiltersGroup, topCasesDeaths } from "../actions/index"
 
 const mapStateToProps = state => ({
   data: state.graphs.cases.data,

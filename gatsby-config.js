@@ -46,6 +46,9 @@ module.exports = {
     // {
     //   resolve: `gatsby-transformer-json-key-value-to-array`
     // },
+
+
+
     {
       resolve: `gatsby-plugin-sass`
     },
@@ -85,5 +88,44 @@ module.exports = {
         ],
       },
     },
+    {
+      resolve: `gatsby-source-files-manager`,
+      options: {
+        countryCode: 'BE',
+        files: [
+          { 
+            url: 'https://opendata.ecdc.europa.eu/covid19/casedistribution/json/',
+            strategy: 'ecdcCasesDeaths',
+            updatedAtHour: '11',
+          },
+          {
+            url:'https://epistat.sciensano.be/Data/COVID19BE.xlsx',
+            strategy: 'xlsxCases',
+            sheet: 'CASES_AGESEX',
+          },
+          // {
+          //   url:'https://epistat.sciensano.be/Data/COVID19BE.xlsx',
+          //   strategy: 'xlsxHosp',
+          //   sheet: 'HOSP',
+          // },
+          // {
+          //   url:'https://epistat.sciensano.be/Data/COVID19BE.xlsx',
+          //   strategy: 'xlsxDeath',
+          //   sheet: 'MORT',
+          // },
+          // {
+          //   url:'https://epistat.sciensano.be/Data/COVID19BE.xlsx',
+          //   strategy: 'xlsxTest',
+          //   sheet: 'TESTS',
+          // },
+        ],
+      },
+    },
+
+
+
+    // {
+    //   resolve: `gatsby-transformer-managed-files`,
+    // },
   ]
 }

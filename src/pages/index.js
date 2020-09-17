@@ -2,13 +2,13 @@ import { graphql } from 'gatsby'
 import React from "react"
 import { createStore } from 'redux'
 import { Provider } from 'react-redux'
-import { normaliseCasesDeaths, normaliseDailyInfections } from '../components/actions'
-import rootReducer from '../components/reducers'
+import { normaliseCasesDeaths, normaliseDailyInfections } from '../store/actions'
+import rootReducer from '../store/reducers'
 import Layout from "../components/layout"
-import CasesDeathsLmaoDatasource from "../components/containers/cases-deaths-lmao-datasource"
-import CasesDeathByCountry from "../components/containers/cases-deaths"
-import DailyInfectionsLmaoDatasource from "../components/containers/daily-infections-lmao-datasource"
-import DailyInfections from "../components/containers/daily-infections"
+import CasesDeathsLmaoDatasource from "../store/containers/cases-deaths-lmao-datasource"
+import CasesDeathByCountry from "../store/containers/cases-deaths"
+import DailyInfectionsLmaoDatasource from "../store/containers/daily-infections-lmao-datasource"
+import DailyInfections from "../store/containers/daily-infections"
 import { Row, Col } from "reactstrap"
 
 export default class Index extends React.Component {
